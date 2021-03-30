@@ -6,14 +6,21 @@
 var generatePassword = function() {
   // Checks for password length requested
   var passwordLength = parseInt(prompt("How long would you like your password to be? Please enter a number between 8 and 128."));
-  console.log(passwordLength);
+  
+  // Validation for password length
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert("Please enter a length between 8 - 128 characters.");
+    return generatePassword();
+  }
+
   // Variables assigned for different input character types
   var lowerCase = "abcdefghijklmnopqrstuvwxyz";
   var upperCase = "ABCDEFGHIJKLMNOPQRSTUVQXYZ";
   var num = "0123456789";
   var specialChar = "`~!@#$%^&*()-_=+[{]}\|;:',<.>/?";
-  //Switch statement to assign user response to certain group of characters or multiple groups
-  charSetType = "";
+  
+  //Switch statement to assign user response to a certain group of characters or multiple groups
+  var charSetType = "";
   var charType = parseInt(prompt("Please enter a number for each character type you would like in your password: 1 for lowercase, 2 for uppercase, 3 for numbers, 4 for special characters. You may select multiple options if you choose. (Please enter the numbers in the order they appear in the statement above starting with the smallest number first- example: 12, 24, 34, 23 )"));
   switch (charType) {
     case 1:
@@ -59,16 +66,18 @@ var generatePassword = function() {
       charSetType = (num + specialChar);
       break;
     default:
-      alert("Please enter a valid response.");
+      alert("Please enter a valid response. You must select at least one character type.");
       return generatePassword();
   }
+  
+  //Loop used to randomize the password based on the responses from the switch statement and passwordLength prompt
   var passwordSet = "";
   for (var i = 0; i < passwordLength; i++) {
-    passwordSet = passwordSet + charSetType(Math.floor(Math.random() * charSetType.length));
+    passwordSet = passwordSet + charSetType.charAt(Math.floor(Math.random() * charSetType.length));
   }
   return passwordSet;
 }
-console.log(generatePassword());
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
