@@ -1,8 +1,6 @@
 // Assignment code here
 // Get length of password requested
 
-// Get 
-
 var generatePassword = function() {
   // Checks for password length requested
   var passwordLength = parseInt(prompt("How long would you like your password to be? Please enter a number between 8 and 128."));
